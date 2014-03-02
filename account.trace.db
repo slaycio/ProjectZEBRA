@@ -1,0 +1,58 @@
+02-28 21:56:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tablela "ACCOUNTS" juz istnieje
+Table "ACCOUNTS" already exists; SQL statement:
+CREATE TABLE `accounts` (`id` INTEGER AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , `passwd` VARCHAR(255) , PRIMARY KEY (`id`) )  [42101-175]
+03-02 19:53:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Kolumna "DESCRIPTION" nie istnieje
+Column "DESCRIPTION" not found; SQL statement:
+INSERT INTO `accounts` (`name` ,`description` ,`account_type` ,`financial_institution` ,`symbol` ,`currency` ,`creation_date` ,`created_by` ) VALUES (?,?,?,?,?,?,?,?) [42122-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.table.Table.getColumn(Table.java:626)
+	at org.h2.command.Parser.parseColumn(Parser.java:826)
+	at org.h2.command.Parser.parseColumnList(Parser.java:811)
+	at org.h2.command.Parser.parseInsert(Parser.java:1004)
+	at org.h2.command.Parser.parsePrepared(Parser.java:394)
+	at org.h2.command.Parser.parse(Parser.java:298)
+	at org.h2.command.Parser.parse(Parser.java:270)
+	at org.h2.command.Parser.prepareCommand(Parser.java:235)
+	at org.h2.engine.Session.prepareLocal(Session.java:436)
+	at org.h2.engine.Session.prepareCommand(Session.java:379)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:70)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:267)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:1076)
+	at com.j256.ormlite.jdbc.JdbcDatabaseConnection.insert(JdbcDatabaseConnection.java:166)
+	at com.j256.ormlite.stmt.mapped.MappedCreate.insert(MappedCreate.java:91)
+	at com.j256.ormlite.stmt.StatementExecutor.create(StatementExecutor.java:450)
+	at com.j256.ormlite.dao.BaseDaoImpl.create(BaseDaoImpl.java:310)
+	at pl.slaycio.projectzebra.datamodel.ORMinit.initializeORM(ORMinit.java:32)
+	at pl.slaycio.projectzebra.datamodel.LocalTest.main(LocalTest.java:7)
+03-02 19:53:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Kolumna "DESCRIPTION" nie istnieje
+Column "DESCRIPTION" not found; SQL statement:
+INSERT INTO `accounts` (`name` ,`description` ,`account_type` ,`financial_institution` ,`symbol` ,`currency` ,`creation_date` ,`created_by` ) VALUES (?,?,?,?,?,?,?,?) [42122-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.table.Table.getColumn(Table.java:626)
+	at org.h2.command.Parser.parseColumn(Parser.java:826)
+	at org.h2.command.Parser.parseColumnList(Parser.java:811)
+	at org.h2.command.Parser.parseInsert(Parser.java:1004)
+	at org.h2.command.Parser.parsePrepared(Parser.java:394)
+	at org.h2.command.Parser.parse(Parser.java:298)
+	at org.h2.command.Parser.parse(Parser.java:270)
+	at org.h2.command.Parser.prepareCommand(Parser.java:235)
+	at org.h2.engine.Session.prepareLocal(Session.java:436)
+	at org.h2.engine.Session.prepareCommand(Session.java:379)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:70)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:267)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:1076)
+	at com.j256.ormlite.jdbc.JdbcDatabaseConnection.insert(JdbcDatabaseConnection.java:166)
+	at com.j256.ormlite.stmt.mapped.MappedCreate.insert(MappedCreate.java:91)
+	at com.j256.ormlite.stmt.StatementExecutor.create(StatementExecutor.java:450)
+	at com.j256.ormlite.dao.BaseDaoImpl.create(BaseDaoImpl.java:310)
+	at pl.slaycio.projectzebra.datamodel.ORMinit.initializeORM(ORMinit.java:32)
+	at pl.slaycio.projectzebra.datamodel.LocalTest.main(LocalTest.java:7)

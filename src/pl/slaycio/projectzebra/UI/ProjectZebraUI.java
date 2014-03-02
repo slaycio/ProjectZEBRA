@@ -1,6 +1,7 @@
-package pl.slaycio.projectzebra;
+package pl.slaycio.projectzebra.UI;
 
 import javax.servlet.annotation.WebServlet;
+import pl.slaycio.projectzebra.datamodel.ORMinit;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
@@ -15,6 +16,10 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("projectzebra")
 public class ProjectZebraUI extends UI {
 
+	
+   
+	
+	
 	@WebServlet(value = "/*", asyncSupported = true)
 	@VaadinServletConfiguration(productionMode = false, ui = ProjectZebraUI.class)
 	public static class Servlet extends VaadinServlet {
@@ -28,11 +33,26 @@ public class ProjectZebraUI extends UI {
 
 		Button button = new Button("Click Me");
 		button.addClickListener(new Button.ClickListener() {
+			
 			public void buttonClick(ClickEvent event) {
-				layout.addComponent(new Label("Thank you for clicking"));
+				try {
+					ORMinit lacznik = new ORMinit();
+					lacznik.initializeORM(Boolean.FALSE);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		
+				
+				layout.addComponent(new Label("Thank you for dodalem nowymbank"));
+				
+				
 			}
 		});
 		layout.addComponent(button);
+		
+		
 	}
 
+	
+	
 }
