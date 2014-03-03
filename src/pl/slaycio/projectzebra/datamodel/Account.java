@@ -1,6 +1,8 @@
 package pl.slaycio.projectzebra.datamodel;
 
+import java.sql.SQLException;
 import java.util.Date;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -131,6 +133,15 @@ public class Account {
 
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
+	}
+	
+	public void saveUsingDAO() {
+		try {
+			ORMinit.accountDao.create(this);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

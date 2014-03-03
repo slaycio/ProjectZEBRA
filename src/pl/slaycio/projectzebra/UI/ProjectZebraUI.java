@@ -1,7 +1,9 @@
 package pl.slaycio.projectzebra.UI;
 
 import javax.servlet.annotation.WebServlet;
-import pl.slaycio.projectzebra.datamodel.ORMinit;
+
+import pl.slaycio.projectzebra.datamodel.*;
+
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
@@ -31,24 +33,32 @@ public class ProjectZebraUI extends UI {
 		layout.setMargin(true);
 		setContent(layout);
 
-		Button button = new Button("Click Me");
-		button.addClickListener(new Button.ClickListener() {
-			
-			public void buttonClick(ClickEvent event) {
+		
+		
+		
 				try {
-					ORMinit lacznik = new ORMinit();
-					lacznik.initializeORM(Boolean.FALSE);
+					ORMinit.initializeORM(Boolean.FALSE);
+					System.out.println("Inicjalizacja ORM");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}		
-				
-				layout.addComponent(new Label("Thank you for dodalem nowymbank"));
-				
-				
-			}
+				}
+			
+		
+		Button button2 = new Button("nowy wpis");
+		button2.addClickListener(new Button.ClickListener() {
+			
+			public void buttonClick(ClickEvent event) {
+								
+				layout.addComponent(new Label("Thank you for dodalem nowymrrbank"));
+				Account account1 = new Account("eKonto45533", "Konto w mBanku", "Rachunek bie¿¹cy","mBank", "EKO");
+				account1.saveUsingDAO();
+				System.out.println(account1.getFinInstitution());
+				}
 		});
-		layout.addComponent(button);
+		layout.addComponent(button2);
+		
+		
 		
 		
 	}
