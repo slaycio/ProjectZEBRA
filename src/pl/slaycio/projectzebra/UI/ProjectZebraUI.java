@@ -51,8 +51,14 @@ public class ProjectZebraUI extends UI {
 			public void buttonClick(ClickEvent event) {
 								
 				layout.addComponent(new Label("Thank you for dodalem nowymrrbank"));
-				Account account1 = new Account("eKonto45533", "Konto w mBanku", "Rachunek bie¿¹cy","mBank", "EKO");
-				account1.saveUsingDAO();
+				
+				
+				
+				FinancialEntity nowaInstytucja = new FinancialEntity("mBank", "", "", "mBank", "Bank", "mBank");
+				//nowaInstytucja.saveUsingDAO();
+				
+				Account account1 = new Account("eKonto4223", "Konto w mBanku", "Rachunek bie¿¹cy", "Pawel2", nowaInstytucja, "EKO");
+				//account1.saveUsingDAO();
 				System.out.println(account1.getFinInstitution());
 				}
 		});
