@@ -53,7 +53,7 @@ public class ProjectZebraUI extends UI {
 				layout.addComponent(new Label("Thank you for dodalem nowymrrbank"));
 				
 				
-				
+				//TODO trzeba bêdzie teraz wyprobowac zakladanie tych obiektow i wtedy GUI
 				FinancialInstitution nowaInstytucja = new FinancialInstitution("mBank", "", "", "mBank", "Bank", "mBank");
 				//nowaInstytucja.saveUsingDAO();
 				
