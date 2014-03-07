@@ -2,72 +2,74 @@ package pl.slaycio.projectzebra.datamodel;
 
 import java.sql.SQLException;
 import java.util.Date;
+
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
-import java.math.BigDecimal;
 
-@DatabaseTable(tableName = "accounts")
-public class Account {
+@DatabaseTable(tableName = "account_owners")
+public class AccountOwner {
 
-	final static String GUI_TABLE_NAME = "Konta w instytucjach finansowych";
-
+	final static String GUI_TABLE_NAME = "Wlasciciele kont";
+	
 	public static final String NAME_FIELD_NAME = "name";
+	public static final String LAST_NAME_FIELD_NAME = "last_name";
 	public static final String DESC_FIELD_NAME = "description";
-	public static final String TYPE_FIELD_NAME = "account_type";
-	public static final String OWNER_FIELD_NAME = "owner";
-	public static final String INSTITUTION_FIELD_NAME = "financial_institution";
+	public static final String OWNER_TYPE_FIELD_NAME = "owner_type";
 	public static final String SYMBOL_FIELD_NAME = "symbol";
-	public static final String CURRENCY_FIELD_NAME = "currency";
-	public static final String BALANCE_FIELD_NAME = "balance";
+	public static final String FINANCIAL_INSTITUTION_FIELD_NAME = "symbol";
 	public static final String CR_DATE_FIELD_NAME = "creation_date";
 	public static final String CR_BY_FIELD_NAME = "created_by";
 
 	@DatabaseField(generatedId = true, index = true)
 	private int id;
 
-	@DatabaseField(columnName = NAME_FIELD_NAME, canBeNull = false)
+	@DatabaseField(columnName = NAME_FIELD_NAME, canBeNull = true)
 	private String name;
 
+	@DatabaseField(columnName = LAST_NAME_FIELD_NAME, canBeNull = true)
+	private String lastName;
+	
 	@DatabaseField(columnName = DESC_FIELD_NAME, canBeNull = true)
 	private String description;
 
-	@DatabaseField(columnName = TYPE_FIELD_NAME, canBeNull = false)
-	private String accountType;
+	@DatabaseField(columnName = OWNER_TYPE_FIELD_NAME, canBeNull = false)
+	private String ownerType;
 
-	@DatabaseField(columnName = OWNER_FIELD_NAME, foreign = true)
-	private AccountOwner owner;
-
-	@DatabaseField(columnName = INSTITUTION_FIELD_NAME, foreign = true)
-	private FinancialInstitution finInstitution;
-	
 	@DatabaseField(columnName = SYMBOL_FIELD_NAME, canBeNull = false)
 	private String symbol;
 	
-	@DatabaseField(columnName = CURRENCY_FIELD_NAME, canBeNull = false)
-	private String currency;
-	
-	@DatabaseField(columnName = BALANCE_FIELD_NAME, canBeNull = false)
-	private BigDecimal balance;
+	@DatabaseField(columnName = FINANCIAL_INSTITUTION_FIELD_NAME, foreign = true)
+	private FinancialInstitution finInstitution;
 
 	@DatabaseField(columnName = CR_DATE_FIELD_NAME, canBeNull = false)
 	private Date creationDate;
 
 	@DatabaseField(columnName = CR_BY_FIELD_NAME, canBeNull = false)
 	private String createdBy;
+	
+	@ForeignCollectionField(eager = false)
+    ForeignCollection<Account> accounts;
+	
+	@ForeignCollectionField(eager = false)
+    ForeignCollection<User> users;
 
-	Account() {
+	
+	
+public AccountOwner() {
+		
 	}
+	
 
-	public Account(String name, String description, String accountType, AccountOwner owner,
-			FinancialInstitution finInstitution, String symbol) {
+	public AccountOwner(String officialName, String name, String lastName,
+			String description, String ownerType, String symbol) {
+
 		this.name = name;
+		this.lastName = lastName;
 		this.description = description;
-		this.accountType = accountType;
-		this.owner = owner;
-		this.finInstitution = finInstitution;
+		this.ownerType = ownerType;
 		this.symbol = symbol;
-		this.currency = "PLN";
-		this.balance = new BigDecimal("0");
 		this.creationDate = new Date();
 		this.createdBy = "currentLoggedUser";
 		
@@ -94,6 +96,17 @@ public class Account {
 		this.saveUsingDAO();
 	}
 
+	public String getLastName() {
+		this.refreshUsingDAO();
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+		this.saveUsingDAO();
+	}
+
+	
 	public String getDescription() {
 		this.refreshUsingDAO();
 		return description;
@@ -104,36 +117,16 @@ public class Account {
 		this.saveUsingDAO();
 	}
 
-	public String getAccountType() {
+	public String getOwnerType() {
 		this.refreshUsingDAO();
-		return accountType;
+		return ownerType;
 	}
 
-	public void setAccountType(String accountType) {
-		this.accountType = accountType;
+	public void setOwnerType(String entityType) {
+		this.ownerType = entityType;
 		this.saveUsingDAO();
 	}
 
-	public AccountOwner getOwner() {
-		this.refreshUsingDAO();
-		return owner;
-	}
-
-	public void setOwner(AccountOwner owner) {
-		this.owner = owner;
-		this.saveUsingDAO();
-	}
-
-	public FinancialInstitution getFinInstitution() {
-		this.refreshUsingDAO();
-		return finInstitution;
-	}
-
-	public void setFinInstitution(FinancialInstitution finInstitution) {
-		this.finInstitution = finInstitution;
-		this.saveUsingDAO();
-	}
-		
 	public String getSymbol() {
 		this.refreshUsingDAO();
 		return symbol;
@@ -144,25 +137,41 @@ public class Account {
 		this.saveUsingDAO();
 	}
 
-	public String getCurrency() {
+	public FinancialInstitution getFinInstitution() {
 		this.refreshUsingDAO();
-		return currency;
+		return finInstitution;
 	}
 
-	public void setCurrency(String currency) {
-		this.currency = currency;
+
+	public void setFinInstitution(FinancialInstitution finInstitution) {
+		this.finInstitution = finInstitution;
 		this.saveUsingDAO();
 	}
 
-	public BigDecimal getBalance() {
+
+	public ForeignCollection<Account> getAccounts() {
 		this.refreshUsingDAO();
-		return balance;
+		return accounts;
 	}
 
-	public void setBalance(BigDecimal balance) {
-		this.balance = balance;
+
+	public void setAccounts(ForeignCollection<Account> accounts) {
+		this.accounts = accounts;
 		this.saveUsingDAO();
 	}
+
+
+	public ForeignCollection<User> getUsers() {
+		this.refreshUsingDAO();
+		return users;
+	}
+
+
+	public void setUsers(ForeignCollection<User> users) {
+		this.users = users;
+		this.saveUsingDAO();
+	}
+
 
 	public Date getCreationDate() {
 		this.refreshUsingDAO();
@@ -186,7 +195,7 @@ public class Account {
 	
 	public void saveUsingDAO() {
 		try {
-			ORMinit.accountDao.create(this);
+			ORMinit.accountOwnerDao.create(this);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -195,7 +204,7 @@ public class Account {
 	
 	public void updateUsingDAO() {
 		try {
-			ORMinit.accountDao.update(this);
+			ORMinit.accountOwnerDao.update(this);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -204,7 +213,7 @@ public class Account {
 	
 	public void deleteUsingDAO() {
 		try {
-			ORMinit.accountDao.delete(this);
+			ORMinit.accountOwnerDao.delete(this);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -213,13 +222,12 @@ public class Account {
 	
 	public void refreshUsingDAO() {
 		try {
-			ORMinit.accountDao.refresh(this);
+			ORMinit.accountOwnerDao.refresh(this);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 	}
-	
 	
 
 }

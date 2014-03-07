@@ -54,12 +54,12 @@ public class ProjectZebraUI extends UI {
 				
 				
 				
-				FinancialEntity nowaInstytucja = new FinancialEntity("mBank", "", "", "mBank", "Bank", "mBank");
+				FinancialInstitution nowaInstytucja = new FinancialInstitution("mBank", "", "", "mBank", "Bank", "mBank");
 				//nowaInstytucja.saveUsingDAO();
 				
-				Account account1 = new Account("eKonto4223", "Konto w mBanku", "Rachunek bie¿¹cy", "Pawel2", nowaInstytucja, "EKO");
-				//account1.saveUsingDAO();
-				System.out.println(account1.getFinInstitution());
+				//Account account1 = new Account("eKonto4223", "Konto w mBanku", "Rachunek bie¿¹cy", "Pawel2", nowaInstytucja, "EKO");
+				
+				//System.out.println(account1.getFinInstitution());
 				}
 		});
 		layout.addComponent(button2);
