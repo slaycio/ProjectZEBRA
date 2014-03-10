@@ -11,6 +11,7 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
@@ -45,6 +46,23 @@ public class ProjectZebraUI extends UI {
 				}
 			
 		
+				TabSheet tabsheet1 = new TabSheet();
+				layout.addComponent(tabsheet1);
+
+				// Create the first tab
+				VerticalLayout tab1 = new VerticalLayout();
+				tabsheet1.addTab(tab1, "Zak³adka numer 1");	
+				
+				TabSheet tabsheet2 = new TabSheet();
+				layout.addComponent(tabsheet2);
+
+				// Create the first tab
+				VerticalLayout tab2 = new VerticalLayout();
+				tabsheet2.addTab(tab2, "Zak³adka numer 2");	
+				
+				
+				
+				
 		Button button2 = new Button("nowy wpis");
 		button2.addClickListener(new Button.ClickListener() {
 			
@@ -54,7 +72,7 @@ public class ProjectZebraUI extends UI {
 				
 				
 				//TODO trzeba bêdzie teraz wyprobowac zakladanie tych obiektow i wtedy GUI
-				FinancialInstitution nowaInstytucja = new FinancialInstitution("mBank", "", "", "mBank", "Bank", "mBank");
+				//FinancialInstitution nowaInstytucja = new FinancialInstitution("mBank", "", "", "mBank", "Bank", "mBank");
 				//nowaInstytucja.saveUsingDAO();
 				
 				//Account account1 = new Account("eKonto4223", "Konto w mBanku", "Rachunek bie¿¹cy", "Pawel2", nowaInstytucja, "EKO");
@@ -62,7 +80,9 @@ public class ProjectZebraUI extends UI {
 				//System.out.println(account1.getFinInstitution());
 				}
 		});
-		layout.addComponent(button2);
+		
+		tabsheet1.addComponent(button2);
+		//layout.addComponent(button2);
 		
 		
 		
